@@ -1,0 +1,14 @@
+name: McAdminPanelPlugin
+main: com.mcadminpanel.plugin.AdminPanel
+version: 1.0.7
+description: Used to connect to the Bukkit API
+commands:
+    mcadminpanelplugincmd:
+        usage: /mcadminpanelplugincmd
+        description: Used for the panel
+    mcapanel:
+        usage: /mcapanel <args>
+        description: Main command used for the panel
+    ap:
+        usage: /ap <args>
+        description: Main command used for the panel
