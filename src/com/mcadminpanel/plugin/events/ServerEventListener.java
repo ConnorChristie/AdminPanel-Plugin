@@ -62,6 +62,8 @@ public class ServerEventListener implements Listener
 	{
 		if (ap.isConnected())
 			ap.getChats().add(new String[] { event.getPlayer().getDisplayName(), event.getMessage() });
+		
+		event.setFormat(ChatColor.AQUA + "[" + ((JSONObject) ap.getUserFromName(event.getPlayer().getName()).get("group")).get("name") + "] " + ChatColor.GOLD + "%1$s: " + ChatColor.WHITE + "%2$s");
 	}
 	
 	@EventHandler(priority = EventPriority.LOWEST)
@@ -74,7 +76,6 @@ public class ServerEventListener implements Listener
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onPlayerLoginEvent(PlayerLoginEvent event)
 	{
-		
 		if (ap.isConnected() && ap.enableWhitelist())
 		{
 			Player player = event.getPlayer();

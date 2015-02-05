@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import net.minecraft.util.org.apache.commons.io.FileUtils;
 import net.minecraft.util.org.apache.commons.io.IOUtils;
@@ -111,20 +112,31 @@ public class MethodHandler
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String getOnlinePlayers()
 	{
-		String plist = "";
+		JSONArray plist = new JSONArray();
 		
 		Player[] players = Bukkit.getOnlinePlayers();
 		
-		for (int i = 0; i < players.length; i++)
+		for (Player p : players)
 		{
-			Player p = players[i];
+			JSONObject obj = new JSONObject();
 			
-			plist += (i != 0 ? ";" : "") + p.getName() + "|" + p.getWorld().getName();
+			obj.put("name", p.getName());
+			obj.put("uuid", p.getUniqueId().toString());
+			obj.put("world", p.getWorld().getName());
+			
+			plist.add(obj);
 		}
 		
-		return "{\"players\":\"" + plist + "\", \"online\":" + Bukkit.getOnlinePlayers().length + ", \"total\":" + Bukkit.getMaxPlayers() + "}";
+		JSONObject ret = new JSONObject();
+		
+		ret.put("players", plist);
+		ret.put("online", Bukkit.getOnlinePlayers().length);
+		ret.put("total", Bukkit.getMaxPlayers());
+		
+		return ret.toJSONString();
 	}
 	
 	public String getChats()
@@ -175,6 +187,7 @@ public class MethodHandler
 			JSONObject obj = new JSONObject();
 			
 			obj.put("name", player.getName());
+			obj.put("uuid", player.getUniqueId().toString());
 			obj.put("world", player.isOnline() ? player.getPlayer().getWorld().getName() : "none");
 			
 			obj.put("health", health);
@@ -214,12 +227,12 @@ public class MethodHandler
 		return obj.toJSONString();
 	}
 	
-	@SuppressWarnings({ "deprecation", "unchecked" })
-	public String getPlayer(String player)
+	@SuppressWarnings("unchecked")
+	public String getPlayer(String playerUUID)
 	{
 		JSONObject obj = new JSONObject();
 		
-		OfflinePlayer op = Bukkit.getOfflinePlayer(player);
+		OfflinePlayer op = Bukkit.getOfflinePlayer(UUID.fromString(playerUUID));
 		
 		if (op != null && op.hasPlayedBefore())
 		{

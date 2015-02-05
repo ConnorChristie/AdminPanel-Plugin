@@ -200,11 +200,11 @@ public class AdminPanel extends JavaPlugin
 					
 					if (obj.containsKey("plugin") && obj.get("plugin").equals("McAdminPanel") && obj.containsKey("type"))
 					{
-						if (obj.get("type").equals("method"))
+						if (obj.get("type").equals("method") && obj.containsKey("method"))
 						{
 							final Long time = (Long) obj.get("time");
-							final String method = (String) obj.get("method");
-							final String paramStr = (String) obj.get("params");
+							final String method = obj.get("method").toString();
+							final String paramStr = obj.get("params").toString();
 							
 							final String[] params = paramStr.length() != 0 ? paramStr.split(", ") : new String[0];
 							
@@ -255,6 +255,7 @@ public class AdminPanel extends JavaPlugin
 								});
 							} catch (Exception e)
 							{
+								System.out.println("Method: " + method);
 								System.out.println("Error: " + arguments);
 								
 								e.printStackTrace();

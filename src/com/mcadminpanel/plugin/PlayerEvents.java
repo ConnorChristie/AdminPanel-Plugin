@@ -1,6 +1,7 @@
 package com.mcadminpanel.plugin;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,7 +14,7 @@ public class PlayerEvents
 {
 	protected static void heal(JSONObject r, List<String> arguments)
 	{
-		Player p = Bukkit.getPlayer(arguments.get(0)); //Change to UUID
+		Player p = Bukkit.getPlayer(UUID.fromString(arguments.get(0))); //Change to UUID
 		
 		if (p != null && p.isOnline())
 		{
@@ -27,7 +28,7 @@ public class PlayerEvents
 	
 	protected static void feed(JSONObject r, List<String> arguments)
 	{
-		Player p = Bukkit.getPlayer(arguments.get(0)); //Change to UUID
+		Player p = Bukkit.getPlayer(UUID.fromString(arguments.get(0))); //Change to UUID
 		
 		if (p != null && p.isOnline())
 		{
@@ -41,7 +42,7 @@ public class PlayerEvents
 	
 	protected static void kill(JSONObject r, List<String> arguments)
 	{
-		Player p = Bukkit.getPlayer(arguments.get(0)); //Change to UUID
+		Player p = Bukkit.getPlayer(UUID.fromString(arguments.get(0))); //Change to UUID
 		
 		if (p != null && p.isOnline())
 		{
@@ -55,7 +56,7 @@ public class PlayerEvents
 	
 	protected static void kick(JSONObject r, List<String> arguments)
 	{
-		Player p = Bukkit.getPlayer(arguments.get(0)); //Change to UUID
+		Player p = Bukkit.getPlayer(UUID.fromString(arguments.get(0))); //Change to UUID
 		
 		if (p != null && p.isOnline())
 		{
@@ -72,7 +73,7 @@ public class PlayerEvents
 	
 	protected static void ban(JSONObject r, List<String> arguments)
 	{
-		OfflinePlayer op = Bukkit.getOfflinePlayer(arguments.get(0)); //Change to UUID
+		OfflinePlayer op = Bukkit.getOfflinePlayer(UUID.fromString(arguments.get(0))); //Change to UUID
 		
 		op.setBanned(true);
 		
