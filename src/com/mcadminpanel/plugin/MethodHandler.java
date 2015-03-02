@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Field;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,11 +23,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -307,24 +303,12 @@ public class MethodHandler
 					pm.enablePlugin(p);
 					
 					out.put("good", "Successfully installed and enabled the plugin!");
-				} catch (MalformedURLException e)
+				} catch (Exception e)
 				{
 					e.printStackTrace();
-				} catch (IOException e)
-				{
-					e.printStackTrace();
-				} catch (UnknownDependencyException e)
-				{
-					e.printStackTrace();
-				} catch (InvalidPluginException e)
-				{
-					e.printStackTrace();
-				} catch (InvalidDescriptionException e)
-				{
-					e.printStackTrace();
+					
+					out.put("error", "Plugin could not be installed, check console to see why.");
 				}
-				
-				out.put("error", "Plugin could not be installed, check console to see why.");
 			} else
 				out.put("error", "Plugin is already installed.");
 		} else if (!pluginName.equalsIgnoreCase(ap.getName()))
@@ -375,7 +359,7 @@ public class MethodHandler
 					if (file.delete())
 						out.put("good", "Successfully deleted the plugin!");
 					else
-						out.put("error", "Could not delete the plugins jar.");
+						out.put("error", "Could not delete the plugins jar file.");
 				} else
 					out.put("error", "Could not find the jar file for the selected plugin.");
 			}
