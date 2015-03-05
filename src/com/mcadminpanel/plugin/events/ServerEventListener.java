@@ -2,6 +2,7 @@ package com.mcadminpanel.plugin.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -122,11 +123,13 @@ public class ServerEventListener implements Listener
 					{
 						if ((Boolean) group.get("ghost"))
 						{
+							player.setGameMode(GameMode.CREATIVE);
 							ap.getGhostFactory().setGhost(player, true);
 							
 							player.getInventory().clear();
 						} else
 						{
+							player.setGameMode(GameMode.SURVIVAL);
 							ap.getGhostFactory().setGhost(player, false);
 						}
 					} else if (player.isOp() || ap.groupHasPermission(group.get("permissions").toString(), "applications"))
@@ -144,6 +147,7 @@ public class ServerEventListener implements Listener
 				}
 			} else if (ap.getGhostFactory().isGhost(player))
 			{
+				player.setGameMode(GameMode.SURVIVAL);
 				ap.getGhostFactory().setGhost(player, false);
 			}
 		}

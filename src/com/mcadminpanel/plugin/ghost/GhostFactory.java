@@ -155,20 +155,12 @@ public class GhostFactory
 		
 		if (isGhost)
 		{
-			System.out.println("Setting to creative");
-			
 			ghosts.add(player.getName());
 			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 15));
-			
-			player.setGameMode(GameMode.CREATIVE);
 		} else if (!isGhost)
 		{
-			System.out.println("Setting to survival");
-			
 			ghosts.remove(player.getName());
 			player.removePotionEffect(PotionEffectType.INVISIBILITY);
-			
-			player.setGameMode(GameMode.SURVIVAL);
 		}
 	}
 	

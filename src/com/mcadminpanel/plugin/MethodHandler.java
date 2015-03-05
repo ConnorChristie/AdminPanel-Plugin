@@ -21,6 +21,7 @@ import net.minecraft.util.org.apache.commons.io.IOUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -84,6 +85,7 @@ public class MethodHandler
 			{
 				p.sendMessage(ChatColor.GOLD + "[Web] " + ChatColor.AQUA + "Congratulations, your application has been accepted!");
 				
+				p.setGameMode(GameMode.SURVIVAL);
 				ap.getGhostFactory().setGhost(p, false);
 			} else if (act.equals("deny"))
 			{
